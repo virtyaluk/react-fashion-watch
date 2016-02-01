@@ -42,7 +42,7 @@ export default {
             {
                 test: /(\.jsx|\.js)$/,
                 loader: 'eslint-loader',
-                exclude: /(node_modules|bower_components|example|dist)/
+                exclude: /(node_modules|bower_components|dist)/
             },
             {
                 test: /\.scss$/,
