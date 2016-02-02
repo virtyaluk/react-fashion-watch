@@ -1,0 +1,358 @@
+/**
+ * ReactFashionWatch - a carefully crafted Fashion Watch component for React.
+ * https://github.com/virtyaluk/react-fashion-watch
+ *
+ * Copyright (c) 2016 Bohdan Shtepan
+ * http://modern-dev.com/
+ *
+ * Licensed under the MIT license.
+ */
+
+/*
+ * Component style
+*/
+
+$light-color: rgba(219, 219, 219, 1);
+$dark-color: rgba(49, 49, 49, 1);
+$shadow-color: rgba(0, 0, 0, 0.25);
+
+.fashion-watch,
+.fashion-watch--rounded,
+.fashion-watch__clock-face,
+.fashion-watch__hands {
+    box-sizing: border-box;
+}
+
+.fashion-watch,
+.fashion-watch--rounded {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 4px solid $light-color;
+    position: relative;
+}
+
+.fashion-watch__clock-face,
+.fashion-watch__hands,
+.fashion-watch__hand--minutes,
+.fashion-watch__hand--hours {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.fashion-watch__indicator,
+.fashion-watch__indicator--long,
+.fashion-watch__hands,
+.fashion-watch__hand--minutes,
+.fashion-watch__hand--hours,
+.fashion-watch__gear,
+.fashion-watch__gear--dot,
+.fashion-watch__hand--date,
+.fashion-watch__hand--seconds {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Clock face */
+.fashion-watch__clock-face {
+    background-color: $dark-color;
+    position: relative;
+    z-index: 0;
+    box-shadow: inset 0 0 18px 4px $shadow-color;
+}
+
+.fashion-watch__indicator,
+.fashion-watch__indicator--long {
+    height: 100%;
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+        background-color: $light-color;
+    }
+
+    &:before {
+        top: 0;
+    }
+
+    &:after {
+        bottom: 0;
+    }
+}
+
+.fashion-watch__indicator--long {
+    width: 6px;
+    left: calc(50% - 3px);
+
+    &:before,
+    &:after {
+        height: 20px;
+    }
+
+    @for $i from 1 through 5 {
+        &:nth-child(#{$i + 1}) {
+            transform: rotate(#{30 * $i}deg);
+        }
+    }
+}
+
+.fashion-watch__indicator {
+    width: 4px;
+    left: calc(50% - 2px);
+
+    &:before,
+    &:after {
+        height: 4px;
+    }
+
+    $marks-count: 24;
+    $one-mark-width: 180 / $marks-count;
+
+    @for $i from 1 through $marks-count {
+        &:nth-child(#{$i + 6}) {
+            transform: rotate(#{$i * $one-mark-width}deg);
+        }
+    }
+}
+
+/* Hands */
+.fashion-watch__hands {
+    z-index: 1;
+    overflow: hidden;
+}
+
+.fashion-watch__hand--minutes,
+.fashion-watch__hand--hours,
+.fashion-watch__gear,
+.fashion-watch__hand--seconds {
+    transition: transform 0.25s ease-in;
+}
+
+.fashion-watch__gear {
+    background-color: $light-color;
+    text-align: left;
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%) rotate(-60deg) skewX(-30deg) scale(1, .866);
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        background-color: inherit;
+    }
+
+    &,
+    &:before,
+    &:after {
+        width: 170px;
+        height: 170px;
+        border-top-right-radius: 20%;
+    }
+
+    &:before {
+        transform: rotate(-135deg) skewX(-45deg) scale(1.414, .707) translate(0, -50%);
+    }
+
+    &:after {
+        transform: rotate(135deg) skewY(-45deg) scale(.707, 1.414) translate(50%);
+    }
+}
+
+.fashion-watch__gear--dot {
+    background-color: $dark-color;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    left: 50%;
+    top: 17%;
+    transform: translateX(-50%);
+    box-shadow: inset 0 0 4px 1px $shadow-color;
+}
+
+.fashion-watch__hand--minutes {
+    & > .fashion-watch__gear:first-child {
+        &,
+        &:before,
+        &:after {
+            box-shadow: 0 0 18px 4px $shadow-color;
+        }
+    }
+}
+
+.fashion-watch__hand--hours {
+    & > .fashion-watch__gear:first-child {
+        &,
+        &:before,
+        &:after {
+            box-shadow: 0 0 8px 2px $shadow-color;
+        }
+    }
+
+    .fashion-watch__gear {
+        top: 40%;
+
+        &,
+        &:before,
+        &:after {
+            width: 60px;
+            height: 60px;
+            background-color: $dark-color;
+            border-top-right-radius: 30%;
+        }
+    }
+
+    .fashion-watch__gear--dot {
+        background-color: $light-color;
+        width: 14px;
+        height: 14px;
+        top: 38.5%;
+    }
+}
+
+.fashion-watch__hand--date {
+    width: 48px;
+    height: 48px;
+    top: calc(50% - 24px);
+    left: calc(50% - 24px);
+    border-radius: 50%;
+    box-sizing: border-box;
+    text-align: center;
+    color: #fff;
+    box-shadow: inset 0 0 6px 2px $shadow-color;
+    font-size: 24px;
+    line-height: 48px;
+}
+
+.fashion-watch__hand--seconds {
+    width: 2px;
+    height: 100%;
+    left: calc(50% - 1px);
+
+    &:before {
+        position: absolute;
+        content: '';
+        width: 50px;
+        height: 50px;
+        background: $light-color;
+        border-radius: 50%;
+        top: -27px;
+        left: -24px;
+        border: 1px dashed $dark-color;
+        box-shadow: 0 0 18px 6px $shadow-color;
+    }
+}
+
+.fashion-watch__gear--bridge {
+    display: none;
+}
+
+/* rounded styles */
+.fashion-watch--rounded {
+    .fashion-watch__hand--minutes,
+    .fashion-watch__hand--hours {
+        .fashion-watch__gear {
+            &:before,
+            &:after {
+                display: none;
+            }
+        }
+
+        .fashion-watch__gear--bridge {
+            position: absolute;
+            display: block;
+            background-color: $light-color;
+            box-shadow: none;
+            width: 40px;
+            height: 50px;
+            left: 50%;
+            top: 14.1%;
+            border-radius: 50% 50% 0 0;
+            transform: translateX(-50%);
+
+            &:before,
+            &:after {
+                background-color: $dark-color;
+                position: absolute;
+                content: '';
+                width: 36px;
+                height: 34px;
+                top: 1px;
+            }
+
+            &:before {
+                border-radius: 0 50% 50% 0;
+                left: -23px;
+            }
+
+            &:after {
+                border-radius: 50% 0 0 50%;
+                left: 27px;
+            }
+        }
+    }
+
+    .fashion-watch__hand--minutes {
+        .fashion-watch__gear {
+            border-radius: 50%;
+            width: 288px;
+            height: 288px;
+            left: calc(50% - 144px);
+            top: calc(50% - 144px);
+            transform: none;
+        }
+
+        .fashion-watch__gear--dot {
+            background-color: $light-color;
+            box-shadow: none;
+            width: 34px;
+            height: 34px;
+            top: 9.4%;
+        }
+    }
+
+    .fashion-watch__hand--hours {
+        .fashion-watch__gear {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            left: calc(50% - 75px);
+            top: calc(50% - 75px);
+            transform: none;
+        }
+
+        .fashion-watch__gear--dot {
+            background-color: $dark-color;
+            box-shadow: none;
+            width: 28px;
+            height: 28px;
+            top: 26%;
+        }
+
+        .fashion-watch__gear--bridge {
+            background-color: $dark-color;
+            width: 34px;
+            height: 40px;
+            top: 29%;
+
+            &:before,
+            &:after {
+                height: 30px;
+                background-color: $light-color;
+            }
+
+            &:before {
+                left: -25px
+            }
+
+            &:after {
+                left: 24px;
+            }
+        }
+    }
+}
