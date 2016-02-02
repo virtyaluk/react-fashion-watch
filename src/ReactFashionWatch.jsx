@@ -55,7 +55,8 @@ export default class ReactFashionWatch extends React.Component {
             curHours = currentDate.getHours() % 12,
             secondsHand = inst.normalizeAngle(curSecs * inst.degsPerSec, angles.secondsHand),
             minutesHand = inst.normalizeAngle(curMins * inst.degsPerMin, angles.minutesHand),
-            hoursHand = inst.normalizeAngle(curHours * inst.degsPerHour, angles.hoursHand);
+            hoursHand = inst.normalizeAngle(curHours * inst.degsPerHour + curMins / 60 * inst.degsPerHour,
+                angles.hoursHand);
 
         this.setState({ angles: { secondsHand, minutesHand, hoursHand }, currentDate });
     }
@@ -78,7 +79,7 @@ export default class ReactFashionWatch extends React.Component {
             <div className={`fashion-watch${this.props.rounded ? '--rounded' : ''}`}>
                 <div className="fashion-watch__clock-face">
                     {[...Array(6)].map((k, i) => <div className="fashion-watch__indicator--long" key={i + 1}></div>)}
-                    {[...Array(18)].map((k, i) => <div className="fashion-watch__indicator" key={i + 1}></div>)}
+                    {[...Array(24)].map((k, i) => <div className="fashion-watch__indicator" key={i + 1}></div>)}
                 </div>
 
                 <div className="fashion-watch__hands">
