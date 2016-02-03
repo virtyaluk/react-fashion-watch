@@ -1,0 +1,34 @@
+{
+  "name": "react-fashion-watch",
+  "description": "A carefully crafted Fashion Watch component for React.",
+  "main": [
+    "dist/react-fashion-watch.min.js",
+    "dist/react-fashion-watch.min.css"
+  ],
+  "authors": [
+    "virtyaluk <winsatana@gmail.com> (http://modern-dev.com/)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "react-component",
+    "watch",
+    "fashion",
+    "watch",
+    "ui"
+  ],
+  "homepage": "https://github.com/virtyaluk/react-fashion-watch",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
