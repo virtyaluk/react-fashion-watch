@@ -12,6 +12,6 @@ import cfg from './dist.config.babel';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 cfg.output.filename = 'react-fashion-watch.min.js';
-cfg.plugins[0] = new ExtractTextPlugin('styles.min.css');
+cfg.plugins[0] = new ExtractTextPlugin('react-fashion-watch.min.css');
 
 export default cfg;
