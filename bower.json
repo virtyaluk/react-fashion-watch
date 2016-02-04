@@ -1,6 +1,7 @@
 {
   "name": "react-fashion-watch",
   "description": "A carefully crafted Fashion Watch component for React.",
+  "version": "0.1.0",
   "main": [
     "dist/react-fashion-watch.min.js",
     "dist/react-fashion-watch.min.css"
@@ -29,6 +30,13 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+	".idea/",
+	".codeclimate.yml",
+    ".eslintrc",
+    ".npmignore",
+    ".travis.yml",
+    "media/",
+	"example/"
   ]
 }
