@@ -1,6 +1,6 @@
 {
   "name": "react-fashion-watch",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A carefully crafted Fashion Watch component for React.",
   "main": "dist/react-fashion-watch.min.js",
   "style": "dist/react-fashion-watch.min.css",
