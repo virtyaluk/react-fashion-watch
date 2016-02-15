@@ -101,7 +101,7 @@ export default class ReactFashionWatch extends React.Component {
                     </div>
 
                     <div className="fashion-watch__hand--date">
-                        <span>{this.state.currentDate.getDay()}</span>
+                        <span>{this.state.currentDate.getDate()}</span>
                     </div>
                 </div>
             </div>
